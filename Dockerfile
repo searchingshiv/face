@@ -1,20 +1,25 @@
-# Use an official Python runtime as a parent image
+# Use the official Python image as a base
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Install required system packages for building dlib
+RUN apt-get update && apt-get install -y \
+    cmake \
+    make \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy the application code
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port that the app runs on
-EXPOSE 8000
+# Expose the port that the app will run on
+EXPOSE 5000
 
-# Define environment variable
-ENV FLASK_APP=app.py
-
-# Run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Command to run the application
+CMD ["python", "app.py"]
