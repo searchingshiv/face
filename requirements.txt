@@ -1,4 +1,5 @@
 flask
+flask_cors
 dlib==19.24.2
 opencv-python
 face_recognition
