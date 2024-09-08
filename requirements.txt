@@ -1,0 +1,6 @@
+flask
+dlib==19.24.2
+opencv-python
+face_recognition
+numpy==1.26.3
+pymongo
